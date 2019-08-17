@@ -10,8 +10,8 @@ https://github.com/raspberrypi/firmware/blob/master/boot/bootcode.bin
 * start.elf  
 下記からダウンロードする  
 https://github.com/raspberrypi/firmware/blob/master/boot/start.elf
-* config.txt
+* config.txt  
 このリポジトリに登録されているものをそのまま使う
-* kernel.img
+* kernel.img  
 makeして生成されたものを使う
 
