@@ -8,8 +8,6 @@
 
 #define UART_BUF_SIZE	(128)
 
-char uart_buf[UART_BUF_SIZE];	// __stack_chk_guardの未定義エラーが解決できなかったので暫定
-
 /**
  * @fn void main()
  * @brief メイン関数
@@ -20,7 +18,7 @@ char uart_buf[UART_BUF_SIZE];	// __stack_chk_guardの未定義エラーが解決
  */
 void main()
 {
-//	char uart_buf[UART_BUF_SIZE];	// __stack_chk_guardの未定義エラーが発生
+	char uart_buf[UART_BUF_SIZE];
 
 	mini_uart_init();
 

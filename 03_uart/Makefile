@@ -16,7 +16,7 @@ SRCS = $(wildcard *.c) $(wildcard lib/*.c)
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 # --- フラグ ---
-CFLAGS = -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles
+CFLAGS = -Wall -O2 -ffreestanding -fno-stack-protector -nostdinc -nostdlib -nostartfiles
 
 # --- 実行タスク ---
 .PHONY: all clean
