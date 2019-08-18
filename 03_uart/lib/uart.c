@@ -78,7 +78,7 @@ void mini_uart_send(char ch)
  */
 char mini_uart_recv()
 {
-	char ret;
+	char ch;
 
 	// --- wait Data ready ---
 	while (!(*AUX_MU_LSR_REG & 0x01)) {
@@ -86,12 +86,9 @@ char mini_uart_recv()
 	}
 
 	// --- receive ---
-	ret = (char)(*AUX_MU_IO_REG);
-	if (ret == '\r') {
-		ret = '\n';
-	}
+	ch = (char)(*AUX_MU_IO_REG);
 
-	return ret;
+	return ch;
 }
 
 /**
@@ -110,5 +107,30 @@ void mini_uart_puts(char *str)
 		}
 		mini_uart_send(*str++);
 	}
+}
+
+/**
+ * @fn void mini_uart_gets(char *str)
+ * @brief 文字列の受信
+ * @param[in] なし
+ * @param[out] str 受信した文字列を格納するバッファ
+ * @return なし
+ * @detail 文字列の受信
+ */
+void mini_uart_gets(volatile char *str)
+{
+	char ch = 0;
+
+	while (ch != '\r') {
+		ch = mini_uart_recv();
+		mini_uart_send(ch);
+		if (ch == '\r') {
+			mini_uart_send('\n');
+		} else {
+			*str++ = ch;
+		}
+	}
+	*str++ = '\n';
+	*str++ = '\0';
 }
 

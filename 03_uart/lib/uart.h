@@ -8,7 +8,7 @@
 */
 
 extern void mini_uart_init();
-extern char mini_uart_recv();
 extern void mini_uart_puts(char *str);
+extern void mini_uart_gets(char *str);
 
 #endif // --- UART_H_INCLUDED ---
