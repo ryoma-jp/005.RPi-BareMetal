@@ -5,3 +5,10 @@
 /obj/lib/*
 !.gitkeep
 
+/asm/*
+!.gitkeep
+!lib
+
+/asm/lib/*
+!.gitkeep
+
