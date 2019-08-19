@@ -41,7 +41,7 @@ $(ASM_DIR)/%.s: %.c
 all: clean $(TARGET)
 
 clean:
-	$(RM) -f $(TARGET) $(TARGET_ELF) $(STARTUP_OBJ) $(OBJS)
+	$(RM) -f $(TARGET) $(TARGET_ELF) $(TARGET_MAP) $(STARTUP_OBJ) $(OBJS)
 
 asm: $(ASMS)
 
