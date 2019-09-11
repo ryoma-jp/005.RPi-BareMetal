@@ -1,0 +1,34 @@
+
+# --- コマンド ---
+CC = arm-none-eabi-gcc
+LD = arm-none-eabi-ld
+OBJCOPY = arm-none-eabi-objcopy
+RM = rm
+
+# --- ファイル ---
+TARGET = kernel.img
+TARGET_ELF = $(TARGET:.img=.elf)
+STARTUP = start_aarch32.S
+STARTUP_OBJ = $(STARTUP:.S=.o)
+LINK_LD = link_aarch32.ld
+
+# --- フラグ ---
+CFLAGS = -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles
+
+# --- 実行タスク ---
+.PHONY: all clean
+all: clean $(TARGET)
+
+$(STARTUP_OBJ): $(STARTUP)
+	$(CC) $(CFLAGS) -c $(STARTUP) -o $(STARTUP_OBJ)
+
+$(TARGET): $(STARTUP_OBJ)
+	$(LD) -nostdlib -nostartfiles $(STARTUP_OBJ) -T $(LINK_LD) -o $(TARGET_ELF)
+	$(OBJCOPY) -O binary $(TARGET_ELF) $(TARGET)
+
+clean:
+	$(RM) -f $(TARGET) $(TARGET_ELF) $(STARTUP_OBJ)
+
+run:
+	qemu-system-aarch32 -M raspi3 -kernel $(TARGET) -d in_asm
+
