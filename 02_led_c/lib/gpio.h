@@ -11,7 +11,11 @@
 * @def MMIO_BASE
 * @brief Memory Mapped I/O(Peripheral Bus)のベースアドレス
 */
+#if defined(AArch64)
 #define MMIO_BASE	(0x3F000000)
+#else	// AArch32
+#define MMIO_BASE	(0x20000000)
+#endif
 
 /**
 * @def GPFSEL
